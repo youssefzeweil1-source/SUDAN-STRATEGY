@@ -1,0 +1,20 @@
+[
+  {"id":"khartoum","name":"الخرطوم"},
+  {"id":"gezira","name":"الجزيرة"},
+  {"id":"white-nile","name":"النيل الأبيض"},
+  {"id":"blue-nile","name":"النيل الأزرق"},
+  {"id":"sennar","name":"سنار"},
+  {"id":"gedaref","name":"القضارف"},
+  {"id":"kassala","name":"كسلا"},
+  {"id":"red-sea","name":"البحر الأحمر"},
+  {"id":"river-nile","name":"نهر النيل"},
+  {"id":"northern","name":"الشمالية"},
+  {"id":"north-kordofan","name":"شمال كردفان"},
+  {"id":"south-kordofan","name":"جنوب كردفان"},
+  {"id":"west-kordofan","name":"غرب كردفان"},
+  {"id":"north-darfur","name":"شمال دارفور"},
+  {"id":"south-darfur","name":"جنوب دارفور"},
+  {"id":"east-darfur","name":"شرق دارفور"},
+  {"id":"west-darfur","name":"غرب دارفور"},
+  {"id":"central-darfur","name":"وسط دارفور"}
+]
