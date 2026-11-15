@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b1a">
+  <meta name="description" content="لعبة استراتيجية تجريبية تعمل دون اتصال بعد تحميلها.">
+  <title>السودان: استراتيجية</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">مشروع لعبة استراتيجية تجريبية</p><h1>السودان: استراتيجية</h1></div>
+    <div class="top-actions">
+      <span id="saveStatus" class="status">لم يتم الحفظ بعد</span>
+      <button id="saveBtn" class="button secondary">حفظ الآن</button>
+      <button id="resetBtn" class="button danger">لعبة جديدة</button>
+    </div>
+  </header>
+  <main class="layout">
+    <section class="panel intro">
+      <div class="panel-heading"><div><p class="eyebrow">المرحلة الأولى</p><h2>ملف السيناريو</h2></div><span class="tag">Offline-ready</span></div>
+      <div class="stats">
+        <div class="stat"><span>تاريخ السيناريو</span><strong>15 نوفمبر 2026</strong></div>
+        <div class="stat"><span>عدد الولايات</span><strong>18 ولاية</strong></div>
+        <div class="stat"><span>نمط التشغيل</span><strong>لاعب واحد</strong></div>
+      </div>
+      <p class="note">هذه نسخة تأسيسية. بيانات السيطرة والموارد والفصائل لم تُضف بعد؛ سنستوردها من قاعدة بياناتك بعد تجهيزها والتحقق من تاريخها ومصدرها.</p>
+    </section>
+    <section class="panel">
+      <div class="panel-heading"><div><p class="eyebrow">استكشاف الخريطة</p><h2>ولايات السودان</h2></div><input id="stateSearch" class="search" type="search" placeholder="ابحث عن ولاية..." aria-label="ابحث عن ولاية"></div>
+      <div class="map-placeholder"><div class="map-symbol">◎</div><h3>الخريطة الجغرافية ستُضاف في المرحلة التالية</h3><p>الولايات الـ18 جاهزة كبيانات قابلة للاختيار. لم نضع حدوداً مرسومة تقريبية حتى لا نعرض خريطة غير دقيقة.</p></div>
+      <div id="statesGrid" class="states-grid" aria-live="polite"></div>
+      <div id="stateDetails" class="state-details"><strong>اختر ولاية</strong><span>ستظهر هنا معلومات الولاية عند تحديدها.</span></div>
+    </section>
+    <section class="panel">
+      <div class="panel-heading"><div><p class="eyebrow">الحفظ المحلي</p><h2>إدارة التقدم</h2></div></div>
+      <p class="note">اللعبة تحفظ اختيارك محلياً على نفس المتصفح والجهاز. زر «حفظ الآن» ينشئ نسخة احتياطية قابلة للتنزيل.</p>
+      <div class="backup-row">
+        <button id="exportBtn" class="button secondary">تصدير نسخة احتياطية</button>
+        <label class="button secondary file-label">استيراد نسخة<input id="importFile" type="file" accept="application/json"></label>
+      </div>
+      <p class="small">ملاحظة: مسح بيانات المتصفح قد يحذف الحفظ المحلي؛ احتفظ بنسخة احتياطية دورياً.</p>
+    </section>
+  </main>
+  <footer>نسخة أولية للتطوير — لا تمثل خريطة سيطرة ميدانية أو بيانات عسكرية حالية.</footer>
+  <script src="./js/app.js"></script>
+</body>
+</html>
