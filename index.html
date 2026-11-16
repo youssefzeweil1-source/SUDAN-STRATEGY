@@ -32,8 +32,29 @@
       <div class="disclaimer"><strong>تنبيه المحتوى</strong><span id="scenarioDisclaimer">كل ما يظهر في هذه النسخة سيناريو خيالي وليس بيانات ميدانية حالية.</span></div>
     </section>
 
+    <section class="panel map-panel">
+      <div class="panel-heading"><div><p class="eyebrow">خريطة العمليات السيناريوية</p><h2>ولايات السودان</h2></div><span id="turnLabel" class="tag">الدور 1</span></div>
+      <p class="section-note">اختر ولاية من الخريطة، أنشئ جيشًا، ثم حرّكه إلى ولاية مجاورة. كل الوحدات والنتائج خيالية داخل اللعبة وليست توصيفًا ميدانيًا.</p>
+      <div class="map-layout">
+        <div class="map-frame"><svg id="mapSvg" viewBox="0 0 900 700" role="img" aria-label="خريطة تفاعلية لولايات السودان"></svg><div class="map-legend"><span><i class="legend-player"></i> جيشك</span><span><i class="legend-enemy"></i> جيش خصم</span><span><i class="legend-neutral"></i> ولاية محايدة</span></div></div>
+        <aside class="map-sidebar">
+          <div id="mapStateSummary" class="map-state-summary"><strong>اختر ولاية من الخريطة</strong><span>ستظهر هنا الملكية والجيوش المتواجدة.</span></div>
+          <div id="resourceSummary" class="resource-summary"></div>
+          <div class="army-actions">
+            <label for="armyFactionSelect">الفصيل الذي ينشئ الجيش</label>
+            <select id="armyFactionSelect"></select>
+            <button id="createArmyBtn" class="button primary">إنشاء جيش في الولاية</button>
+            <div class="action-row"><button id="moveArmyBtn" class="button secondary" disabled>نقل الجيش المختار</button><button id="attackBtn" class="button danger" disabled>بدء اشتباك</button></div>
+          </div>
+          <div id="armiesList" class="armies-list"></div>
+          <div id="selectedArmyInfo" class="selected-army-info"><strong>لا يوجد جيش مختار</strong><span>أنشئ جيشًا أو اختر راية على الخريطة.</span></div>
+          <div class="recruit-box"><strong>تجنيد وحدات</strong><div class="recruit-grid"><button class="recruit-button" data-unit="infantry">مشاة <small>3 أفراد / 8 صناعة</small></button><button class="recruit-button" data-unit="armor">مدرعات <small>5 أفراد / 18 صناعة</small></button><button class="recruit-button" data-unit="artillery">مدفعية <small>4 أفراد / 15 صناعة</small></button><button class="recruit-button" data-unit="air">دعم جوي <small>6 أفراد / 24 صناعة</small></button></div></div>
+        </aside>
+      </div>
+    </section>
+
     <section class="panel">
-      <div class="panel-heading"><div><p class="eyebrow">استكشاف السيناريو</p><h2>ولايات السودان</h2></div><input id="stateSearch" class="search" type="search" placeholder="ابحث عن ولاية..." aria-label="ابحث عن ولاية"></div>
+      <div class="panel-heading"><div><p class="eyebrow">قائمة الخريطة</p><h2>ولايات السودان</h2></div><input id="stateSearch" class="search" type="search" placeholder="ابحث عن ولاية..." aria-label="ابحث عن ولاية"></div>
       <p class="section-note">اختر ولاية لقراءة ملاحظة السيناريو وعلاقات التأثير المجرّدة. هذه المؤشرات ليست خريطة سيطرة.</p>
       <div id="statesGrid" class="states-grid" aria-live="polite"></div>
       <div id="stateDetails" class="state-details"><strong>اختر ولاية</strong><span>ستظهر هنا معلومات الولاية عند تحديدها.</span></div>
@@ -47,7 +68,7 @@
     </section>
 
     <section class="panel decisions-panel">
-      <div class="panel-heading"><div><p class="eyebrow">جولة القرار</p><h2>مؤشرات التقدم</h2></div><span id="turnLabel" class="tag">الجولة 1</span></div>
+      <div class="panel-heading"><div><p class="eyebrow">جولة القرار</p><h2>مؤشرات التقدم</h2></div></div>
       <div class="meters" aria-live="polite">
         <div class="meter"><div><span>الشرعية</span><strong id="legitimacyValue">50</strong></div><div class="meter-track"><i id="legitimacyMeter"></i></div></div>
         <div class="meter"><div><span>الاستقرار</span><strong id="stabilityValue">50</strong></div><div class="meter-track"><i id="stabilityMeter"></i></div></div>

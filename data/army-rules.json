@@ -1,0 +1,28 @@
+{
+  "units": {
+    "infantry": {"label":"مشاة","description":"وحدة أساسية مرنة.","cost":{"manpower":3,"industry":8},"strength":1},
+    "armor": {"label":"مدرعات","description":"قوة أعلى وتكلفة صناعية أكبر.","cost":{"manpower":5,"industry":18},"strength":3},
+    "artillery": {"label":"مدفعية","description":"دعم بعيد المدى داخل المعركة السيناريوية.","cost":{"manpower":4,"industry":15},"strength":2},
+    "air": {"label":"دعم جوي","description":"وحدة نادرة ترفع قوة الجيش.","cost":{"manpower":6,"industry":24},"strength":4}
+  },
+  "neighbors": {
+    "khartoum":["gezira","white-nile","river-nile"],
+    "gezira":["khartoum","white-nile","sennar","gedaref"],
+    "white-nile":["khartoum","gezira","north-kordofan","south-kordofan","sennar"],
+    "river-nile":["khartoum","northern","red-sea"],
+    "northern":["river-nile"],
+    "red-sea":["river-nile","kassala","gedaref"],
+    "kassala":["red-sea","gedaref"],
+    "gedaref":["kassala","red-sea","gezira","sennar"],
+    "sennar":["gezira","white-nile","blue-nile","gedaref"],
+    "blue-nile":["sennar","south-kordofan"],
+    "north-kordofan":["white-nile","west-kordofan","north-darfur","south-kordofan"],
+    "south-kordofan":["white-nile","north-kordofan","west-kordofan","blue-nile"],
+    "west-kordofan":["north-kordofan","south-kordofan","south-darfur","east-darfur"],
+    "north-darfur":["north-kordofan","west-darfur","central-darfur"],
+    "west-darfur":["north-darfur","central-darfur","south-darfur"],
+    "central-darfur":["north-darfur","west-darfur","south-darfur","east-darfur"],
+    "south-darfur":["west-darfur","central-darfur","east-darfur","west-kordofan"],
+    "east-darfur":["central-darfur","south-darfur","west-kordofan"]
+  }
+}
