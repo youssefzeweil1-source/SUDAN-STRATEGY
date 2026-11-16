@@ -1,0 +1,8 @@
+name = "sudan-strategy-api"
+main = "worker.js"
+compatibility_date = "2026-11-16"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sudan-strategy-db"
+database_id = "497c915e-018e-49df-8462-dd58f6339d1c"

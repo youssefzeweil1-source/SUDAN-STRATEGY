@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "contentStatus": "fictional-scenario-not-live-intelligence",
+    "source": "bundled-fallback"
+  },
+  "scenario": {
+    "id": "sandbox-2026",
+    "title": "ممرات السودان: سيناريو التفاوض",
+    "dateLabel": "نوفمبر 2026",
+    "description": "سيناريو تعليمي خيالي عن إدارة التوترات المحلية عبر التفاوض والخدمات والشرعية المدنية.",
+    "disclaimer": "كل الجهات والتأثيرات هنا خيالية لأغراض اللعب، ولا تمثل جهات حقيقية أو خريطة سيطرة أو معلومات ميدانية حالية."
+  },
+  "states": [
+    {"id":"khartoum","name":"الخرطوم","region":"الوسط","note":"مركز إداري وإعلامي؛ القرارات فيه تؤثر على الشرعية العامة في السيناريو.","factions":[{"id":"civic-coalition","influence":70,"stance":"حوار مفتوح"},{"id":"transitional-institutions","influence":78,"stance":"استقرار مؤسسي"}]},
+    {"id":"gezira","name":"الجزيرة","region":"الوسط","note":"ولاية زراعية في السيناريو؛ الخدمات وسلاسل الإمداد عنصران حاسمان.","factions":[{"id":"civic-coalition","influence":58,"stance":"خدمات"},{"id":"community-network","influence":63,"stance":"شراكة محلية"}]},
+    {"id":"white-nile","name":"النيل الأبيض","region":"الوسط","note":"مساحة عبور وخدمات؛ نجاح الوساطة يقلل الاحتكاك بين المجتمعات.","factions":[{"id":"regional-council","influence":47,"stance":"تفاوض"},{"id":"community-network","influence":66,"stance":"وساطة"}]},
+    {"id":"blue-nile","name":"النيل الأزرق","region":"الشرق الأوسط","note":"تنوع مجتمعي مرتفع؛ الحوار المحلي يزيد نقاط الثقة.","factions":[{"id":"regional-council","influence":72,"stance":"صلاحيات محلية"},{"id":"community-network","influence":69,"stance":"توافق مجتمعي"}]},
+    {"id":"sennar","name":"سنار","region":"الشرق الأوسط","note":"ولاية تربط بين مراكز سكانية؛ الأولوية للاستقرار والخدمات.","factions":[{"id":"transitional-institutions","influence":61,"stance":"استمرارية"},{"id":"civic-coalition","influence":54,"stance":"خدمات"}]},
+    {"id":"gedaref","name":"القضارف","region":"الشرق","note":"سيناريو حدودي داخلي؛ التعاون الاقتصادي يخفض التوتر.","factions":[{"id":"transitional-institutions","influence":59,"stance":"تعاون اقتصادي"},{"id":"community-network","influence":52,"stance":"تهدئة"}]},
+    {"id":"kassala","name":"كسلا","region":"الشرق","note":"شبكات اجتماعية متنوعة؛ الحلول التشاركية تمنح نقاط شرعية.","factions":[{"id":"regional-council","influence":64,"stance":"تفاوض"},{"id":"community-network","influence":71,"stance":"تواصل محلي"}]},
+    {"id":"red-sea","name":"البحر الأحمر","region":"الشرق","note":"ولاية ساحلية في الخيال؛ إدارة الموارد العامة هي محور القرار.","factions":[{"id":"civic-coalition","influence":49,"stance":"إدارة عامة"},{"id":"transitional-institutions","influence":67,"stance":"استقرار"}]},
+    {"id":"river-nile","name":"نهر النيل","region":"الشمال","note":"مجتمعات متباعدة؛ التواصل والخدمات يحددان سرعة الاستجابة.","factions":[{"id":"civic-coalition","influence":45,"stance":"خدمات"},{"id":"transitional-institutions","influence":62,"stance":"تنسيق"}]},
+    {"id":"northern","name":"الشمالية","region":"الشمال","note":"ولاية واسعة؛ التخطيط المتدرج أفضل من القرارات المفاجئة.","factions":[{"id":"community-network","influence":48,"stance":"تدرج"},{"id":"transitional-institutions","influence":57,"stance":"تخطيط"}]},
+    {"id":"north-kordofan","name":"شمال كردفان","region":"كردفان","note":"حلقة وصل داخلية؛ التفاوض على الخدمات يرفع الاستقرار.","factions":[{"id":"civic-coalition","influence":55,"stance":"تفاوض خدمي"},{"id":"regional-council","influence":51,"stance":"تفاهم"}]},
+    {"id":"south-kordofan","name":"جنوب كردفان","region":"كردفان","note":"تعدد محلي واضح؛ الاعتراف بالمطالب وفتح الحوار يرفع الثقة.","factions":[{"id":"regional-council","influence":74,"stance":"حوار سياسي"},{"id":"community-network","influence":73,"stance":"ثقة محلية"}]},
+    {"id":"west-kordofan","name":"غرب كردفان","region":"كردفان","note":"التوازن بين الخدمات والموارد هو تحدي الجولة.","factions":[{"id":"transitional-institutions","influence":53,"stance":"توازن"},{"id":"regional-council","influence":62,"stance":"تفاوض"}]},
+    {"id":"north-darfur","name":"شمال دارفور","region":"دارفور","note":"مساحة واسعة؛ الأولوية في السيناريو لحماية الخدمات المدنية.","factions":[{"id":"community-network","influence":76,"stance":"حماية الخدمات"},{"id":"civic-coalition","influence":57,"stance":"شرعية مدنية"}]},
+    {"id":"south-darfur","name":"جنوب دارفور","region":"دارفور","note":"كثافة سكانية متنوعة؛ التهدئة المجتمعية تمنح أثرًا مضاعفًا.","factions":[{"id":"community-network","influence":79,"stance":"تهدئة مجتمعية"},{"id":"regional-council","influence":68,"stance":"تفاوض"}]},
+    {"id":"east-darfur","name":"شرق دارفور","region":"دارفور","note":"نجاح الشراكات المحلية يرفع قابلية تنفيذ الاتفاقات.","factions":[{"id":"regional-council","influence":65,"stance":"شراكة"},{"id":"community-network","influence":70,"stance":"وساطة"}]},
+    {"id":"west-darfur","name":"غرب دارفور","region":"دارفور","note":"الوساطة المجتمعية هي المسار الأفضل في هذا السيناريو.","factions":[{"id":"community-network","influence":82,"stance":"وساطة محلية"},{"id":"civic-coalition","influence":52,"stance":"خدمات"}]},
+    {"id":"central-darfur","name":"وسط دارفور","region":"دارفور","note":"القرارات المتدرجة تقلل المخاطر وتزيد فرص التوافق.","factions":[{"id":"regional-council","influence":67,"stance":"تدرج"},{"id":"community-network","influence":75,"stance":"توافق"}]}
+  ],
+  "factions": [
+    {"id":"civic-coalition","name":"الائتلاف المدني الوطني","type":"مدني","description":"جهة خيالية تركز على الخدمات والتمثيل المحلي والحوار المفتوح.","objectives":"رفع الشرعية المدنية وتحسين الخدمات الأساسية.","color":"#c6a76a","isFictional":true},
+    {"id":"regional-council","name":"المجلس الإقليمي التفاوضي","type":"إقليمي","description":"جهة خيالية تطالب بصلاحيات محلية أوسع عبر مسار تفاوضي سلمي.","objectives":"توسيع الإدارة المحلية مع الحفاظ على قنوات التفاوض.","color":"#78b7a0","isFictional":true},
+    {"id":"community-network","name":"شبكة المجتمعات المحلية","type":"مجتمعي","description":"شبكة خيالية من لجان محلية تعمل على الوساطة والخدمات.","objectives":"حماية الثقة المجتمعية ومنع اتساع التوتر.","color":"#d88b70","isFictional":true},
+    {"id":"transitional-institutions","name":"المؤسسات الانتقالية","type":"مؤسسي","description":"جهة خيالية تهتم باستمرارية المؤسسات وتوزيع الموارد بعدالة.","objectives":"حماية الاستقرار وبناء اتفاقات قابلة للتنفيذ.","color":"#9ba7d8","isFictional":true}
+  ],
+  "objectives": [
+    {"id":"public-legitimacy","title":"بناء الشرعية العامة","description":"ارفع الشرعية عبر قرارات شفافة وحوار قابل للشرح.","rewardPoints":30},
+    {"id":"service-continuity","title":"استمرارية الخدمات","description":"وازن بين الموارد والاستقرار حتى لا تتوقف الخدمات المدنية.","rewardPoints":25},
+    {"id":"local-dialogue","title":"فتح قنوات الحوار المحلي","description":"امنح المجتمعات مساحة للتفاوض قبل اتخاذ قرارات واسعة الأثر.","rewardPoints":35}
+  ],
+  "events": [
+    {"id":"mediation-session","title":"جلسة وساطة محلية","description":"وصلت دعوة لعقد جلسة تستمع إلى مطالب الولاية وتحدد ما يمكن تنفيذه على مراحل.","choices":[{"id":"open-dialogue","label":"فتح الحوار الآن","description":"زيادة الشرعية والثقة مع كلفة زمنية بسيطة.","effects":{"legitimacy":8,"stability":4,"services":-2}},{"id":"service-first","label":"البدء بحزمة خدمات","description":"تحسين الخدمات بسرعة مع حاجة أكبر للتنسيق.","effects":{"legitimacy":3,"stability":2,"services":9}},{"id":"delay-decision","label":"تأجيل القرار","description":"يحافظ على الموارد مؤقتًا لكنه يضعف الثقة.","effects":{"legitimacy":-5,"stability":-3,"services":1}}]},
+    {"id":"resource-compact","title":"اتفاق الموارد العامة","description":"تختلف الأطراف حول ترتيب الأولويات. المطلوب صياغة اتفاق معلن لا يمنح جهة واحدة كل المكاسب.","choices":[{"id":"publish-criteria","label":"نشر معايير التوزيع","description":"يرفع الشفافية ويقلل سوء الفهم.","effects":{"legitimacy":7,"stability":3,"services":4}},{"id":"local-committee","label":"تشكيل لجنة محلية","description":"يقوي المشاركة لكنه يحتاج وقتًا.","effects":{"legitimacy":5,"stability":7,"services":1}},{"id":"central-plan","label":"فرض خطة موحدة","description":"أسرع إداريًا لكنه يضغط على الثقة المحلية.","effects":{"legitimacy":-4,"stability":2,"services":7}}]},
+    {"id":"review-round","title":"مراجعة الجولة","description":"انتهت الجولة الأولى. هل تعتمد اتفاقًا تدريجيًا وتترك مساحة للمراجعة أم تنتظر توافقًا كاملًا؟","choices":[{"id":"phased-agreement","label":"اعتماد اتفاق مرحلي","description":"يمنح الأطراف نقطة بداية قابلة للتقييم.","effects":{"legitimacy":6,"stability":6,"services":3}},{"id":"full-consensus","label":"طلب توافق كامل","description":"يحمي الجودة لكنه يبطئ التنفيذ.","effects":{"legitimacy":4,"stability":1,"services":-1}},{"id":"community-review","label":"إحالة الاتفاق للمجتمعات","description":"يرفع الملكية المحلية ويؤخر الحسم.","effects":{"legitimacy":9,"stability":4,"services":-2}}]}
+  ]
+}
