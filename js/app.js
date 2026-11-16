@@ -91,7 +91,9 @@ function stateCenter(feature) { const ring = feature.geometry.coordinates[0]; co
 function createSvgElement(tag, attrs = {}) { const element = document.createElementNS(SVG_NS, tag); Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value)); return element; }
 
 function renderMap() {
-  if (!geojson) return; mapProjection = calculateBounds(); const svg = $("mapSvg"); svg.replaceChildren();
+  const loading = $("mapLoading");
+  if (!geojson) { loading.textContent = "تعذر تحميل ملف الخريطة"; return; }
+  loading.hidden = true; mapProjection = calculateBounds(); const svg = $("mapSvg"); svg.replaceChildren();
   geojson.features.forEach((feature) => {
     const id = featureStateId(feature); if (!id) return; const path = createSvgElement("path", { d: polygonPath(feature.geometry.coordinates), class: `state-shape${game.selectedState === id ? " selected" : ""}`, fill: stateFill(id), "data-state-id": id }); path.addEventListener("click", () => selectState(id)); svg.appendChild(path);
     const label = stateById(id); const [x, y] = stateCenter(feature); const text = createSvgElement("text", { x, y, class: "map-label", "text-anchor": "middle" }); text.textContent = label?.name || id; text.addEventListener("click", () => selectState(id)); svg.appendChild(text);
