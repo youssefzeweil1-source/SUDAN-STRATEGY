@@ -48,7 +48,7 @@ function newGame() {
     id: clientId(), scenarioId: "sandbox-2026", factionId: "civic-coalition", selectedState: "khartoum", selectedArmyId: "army-player-1", turn: 0,
     resources: { manpower: 30, industry: 100 },
     control: { khartoum: "civic-coalition", "south-kordofan": "regional-council", "west-darfur": "community-network", "red-sea": "transitional-institutions" },
-    armies: initialArmies(), history: [], lastSavedAt: null, nextSupplyAt: Date.now() + MINUTE_MS
+    armies: initialArmies(), history: [{ type: "system", text: "بدأت غرفة القيادة عملياتها.", at: new Date().toISOString() }], buildQueue: [], lastSavedAt: null, nextSupplyAt: Date.now() + MINUTE_MS
   };
 }
 
@@ -60,6 +60,7 @@ function mergeGame(source) {
     armies: Array.isArray(source.armies) ? source.armies : base.armies,
     control: { ...base.control, ...(source.control || {}) },
     history: Array.isArray(source.history) ? source.history : [],
+    buildQueue: Array.isArray(source.buildQueue) ? source.buildQueue : [],
     nextSupplyAt: Number(source.nextSupplyAt) > Date.now() ? Number(source.nextSupplyAt) : Date.now() + MINUTE_MS
   };
 }
@@ -130,6 +131,7 @@ function startClock() {
   clearInterval(clockTimer);
   clockTimer = setInterval(() => {
     if (!game) return;
+    processProduction();
     if (Date.now() >= game.nextSupplyAt) supplyTick();
     renderClock();
   }, 1000);
@@ -168,10 +170,38 @@ function supplyTick() {
   const aiReport = moveEnemyArmies();
   game.nextSupplyAt = Date.now() + MINUTE_MS;
   game.turn += 1;
+  logEvent(`وصلت إمدادات ${ownedStates.length} ولاية — العدو حرّك ${aiReport.moved} جيش`, "minute");
   game.history.push({ type: "minute", ownedStates: ownedStates.length, income, aiReport, at: new Date().toISOString() });
   save();
   render();
   notify(`إمدادات +${income.manpower} أفراد و+${income.industry} صناعة — العدو تحرك ${aiReport.moved} جيش`);
+}
+
+function logEvent(text, type = "system") {
+  game.history.push({ type, text, at: new Date().toISOString() });
+  game.history = game.history.slice(-12);
+}
+
+function productionSeconds(type) {
+  return { infantry: 15, armor: 28, artillery: 24, air: 35 }[type] || 20;
+}
+
+function processProduction() {
+  if (!game?.buildQueue?.length) return;
+  const now = Date.now();
+  const ready = game.buildQueue.filter((item) => item.readyAt <= now);
+  if (!ready.length) return;
+  ready.forEach((item) => {
+    const army = game.armies.find((candidate) => candidate.id === item.armyId);
+    if (!army) return;
+    army.units[item.unitType] = (army.units[item.unitType] || 0) + 1;
+    army.morale = Math.min(100, army.morale + 2);
+    logEvent(`${rules.units[item.unitType]?.label || item.unitType} جاهزة في ${army.name}`, "production");
+  });
+  game.buildQueue = game.buildQueue.filter((item) => item.readyAt > now);
+  save();
+  render();
+  notify("اكتمل إنتاج وحدة جديدة");
 }
 
 function moveEnemyArmies() {
@@ -293,9 +323,27 @@ function render() {
   renderSelection();
   renderActions();
   renderArmies();
+  renderCommandPanel();
   renderClock();
   renderHint();
   $("turnLabel").textContent = `اليوم ${game.turn + 1}`;
+}
+
+function renderCommandPanel() {
+  const army = game.armies.find((item) => item.id === game.selectedArmyId);
+  const state = army ? stateById(army.stateId) : stateById(game.selectedState);
+  $("intelPanel").innerHTML = army
+    ? `<div class="intel-row"><span>الوحدة</span><b>${army.name}</b></div><div class="intel-row"><span>الموقع</span><b>${state?.name || "غير معروف"}</b></div><div class="intel-row"><span>القوة</span><b>${Math.round(power(army))}</b></div><div class="intel-row"><span>المعنويات</span><b>${army.morale}%</b></div><div class="unit-line">${unitSummary(army)}</div>`
+    : `<div class="empty-panel">اختر جيشًا من الخريطة لعرض معلوماته وأوامره.</div>`;
+  const queue = game.buildQueue || [];
+  $("queueCount").textContent = queue.length;
+  $("buildQueue").innerHTML = queue.length ? queue.map((item) => {
+    const armyTarget = game.armies.find((armyItem) => armyItem.id === item.armyId);
+    const left = Math.max(0, Math.ceil((item.readyAt - Date.now()) / 1000));
+    return `<div class="queue-item"><span class="queue-icon">＋</span><div><b>${rules.units[item.unitType]?.label || item.unitType}</b><small>${armyTarget?.name || "جيش"} · ${left} ثانية</small></div></div>`;
+  }).join("") : `<span class="empty-panel">لا توجد وحدات قيد التجهيز</span>`;
+  const events = (game.history || []).slice(-5).reverse();
+  $("eventLog").innerHTML = events.length ? events.map((event) => `<div class="event-item"><i class="event-dot ${event.type || "system"}"></i><span>${event.text || "تحديث استراتيجي"}</span></div>`).join("") : `<span class="empty-panel">لا توجد أحداث بعد</span>`;
 }
 
 function renderHint() {
@@ -410,6 +458,7 @@ function move() {
   game.control[destination] = army.factionId;
   game.selectedState = destination;
   game.turn += 1;
+  logEvent(`${army.name} تحرك إلى ${stateById(destination)?.name || destination}`, "movement");
   save();
   render();
   notify("تحرك الجيش");
@@ -427,10 +476,12 @@ function attack() {
     army.stateId = destination;
     army.morale = Math.max(0, army.morale - 8);
     game.control[destination] = army.factionId;
+    logEvent(`${army.name} انتصر وسيطر على ${stateById(destination)?.name || destination}`, "battle");
     notify("انتصرت وسيطرت على الولاية");
   } else {
     army.morale = Math.max(0, army.morale - 14);
     reduceArmy(army, Math.max(1, Math.ceil(power(army) * 0.2)));
+    logEvent(`${army.name} خسر الاشتباك قرب ${stateById(destination)?.name || destination}`, "battle");
     notify("خسر الجيش الاشتباك");
   }
   game.turn += 1;
@@ -444,15 +495,17 @@ function recruit(type) {
   const spec = rules.units[type];
   if (!army || army.owner !== "player" || !spec) return notify("اختر جيشك أولًا");
   if (game.resources.manpower < spec.cost.manpower || game.resources.industry < spec.cost.industry) return notify("الموارد لا تكفي");
+  if ((game.buildQueue || []).filter((item) => item.armyId === army.id).length >= 3) return notify("طابور هذا الجيش ممتلئ");
   game.resources.manpower -= spec.cost.manpower;
   game.resources.industry -= spec.cost.industry;
-  army.units[type] = (army.units[type] || 0) + 1;
-  army.morale = Math.min(100, army.morale + 2);
+  game.buildQueue ||= [];
+  game.buildQueue.push({ armyId: army.id, unitType: type, readyAt: Date.now() + productionSeconds(type) * 1000 });
+  logEvent(`بدأ تجهيز ${spec.label} في ${army.name}`, "production");
   game.turn += 1;
   $("unitDialog").close();
   save();
   render();
-  notify(`تم تجنيد ${spec.label}`);
+  notify(`بدأ تجهيز ${spec.label} — راجع طابور الإنتاج`);
 }
 
 function save() {
