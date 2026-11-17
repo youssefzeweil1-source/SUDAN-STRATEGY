@@ -200,11 +200,7 @@ function resolveEnemyBattle(enemy, defender) {
   if (power(enemy) * (0.9 + Math.random() * 0.2) > power(defender) * (0.9 + Math.random() * 0.2)) {
     reduceArmy(defender, Math.max(1, Math.ceil(power(defender) * 0.2)));
     defender.morale = Math.max(0, defender.morale - 12);
-    if (!totalUnits(defender)) {
-      game.armies = game.armies.filter((army) => army.id !== defender.id);
-      enemy.stateId = defender.stateId;
-      game.control[enemy.stateId] = enemy.factionId;
-    }
+    if (!totalUnits(defender)) defender.units.infantry = 1;
     notify("تحرك العدو وهاجم جيشًا تابعًا لك");
   } else {
     reduceArmy(enemy, Math.max(1, Math.ceil(power(enemy) * 0.2)));
@@ -244,7 +240,8 @@ function renderMap() {
     const selected = game.selectedState === id;
     const selectedArmy = game.armies.find((army) => army.id === game.selectedArmyId);
     const destination = selectedArmy && id !== selectedArmy.stateId && game.selectedState === id;
-    const path = svgEl("path", { d: pathFor(feature.geometry.coordinates), class: `state-shape${selected ? " selected" : ""}${destination ? " destination" : ""}`, fill: stateFill(id), "data-state-id": id });
+    const movable = selectedArmy?.owner === "player" && id !== selectedArmy.stateId && (rules.neighbors[selectedArmy.stateId] || []).includes(id);
+    const path = svgEl("path", { d: pathFor(feature.geometry.coordinates), class: `state-shape${selected ? " selected" : ""}${destination ? " destination" : ""}${movable ? " movable" : ""}`, fill: stateFill(id), "data-state-id": id });
     path.addEventListener("click", () => selectState(id));
     svg.appendChild(path);
     const [x, y] = centerFor(feature);
@@ -297,7 +294,15 @@ function render() {
   renderActions();
   renderArmies();
   renderClock();
+  renderHint();
   $("turnLabel").textContent = `اليوم ${game.turn + 1}`;
+}
+
+function renderHint() {
+  const army = game.armies.find((item) => item.id === game.selectedArmyId);
+  $("gameHint").textContent = army?.owner === "player"
+    ? `تم اختيار ${army.name}. الولايات المضيئة هي الوجهات المتاحة؛ اضغط واحدة منها ثم اضغط تحرك أو هجوم.`
+    : "اضغط على راية جيشك أو على جيش من الشريط، ثم اختر ولاية مجاورة مضيئة للتحرك أو الاشتباك.";
 }
 
 function renderResources() {
@@ -330,6 +335,22 @@ function renderActions() {
   const army = game.armies.find((item) => item.id === game.selectedArmyId);
   const destination = stateById(game.selectedState);
   if (army?.owner === "player") {
+    const destinations = (rules.neighbors[army.stateId] || []).map((stateId) => stateById(stateId)).filter(Boolean);
+    if (destinations.length) {
+      const tray = document.createElement("div");
+      tray.className = "destination-tray";
+      const label = document.createElement("span");
+      label.textContent = "وجهات";
+      tray.append(label);
+      destinations.forEach((state) => {
+        const button = document.createElement("button");
+        button.className = `destination-chip${game.selectedState === state.id ? " active" : ""}`;
+        button.textContent = state.name;
+        button.onclick = () => selectState(state.id);
+        tray.append(button);
+      });
+      dock.append(tray);
+    }
     const adjacent = (rules.neighbors[army.stateId] || []).includes(game.selectedState) && game.selectedState !== army.stateId;
     const enemy = armyAt(game.selectedState, "ai");
     if (adjacent && enemy) dock.append(actionButton(`هجوم على ${destination.name}`, "red", attack));
@@ -441,7 +462,6 @@ function save() {
 }
 
 function resetGame() {
-  if (!confirm("بدء لعبة جديدة؟")) return;
   localStorage.removeItem(SAVE_KEY);
   game = newGame();
   render();
