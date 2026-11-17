@@ -13,13 +13,13 @@
   <header class="gamebar">
     <div class="brand"><span class="brand-mark">◎</span><div><b>السودان: استراتيجية</b><small>غرفة القيادة</small></div></div>
     <div id="resourceBar" class="resource-pills"></div>
-    <div class="game-actions"><span id="saveStatus" class="save-status">جاري التحميل...</span><button id="saveBtn" class="icon-button" title="حفظ">حفظ</button><button id="resetBtn" class="icon-button" title="بدء لعبة جديدة">جديد</button></div>
+    <div class="game-actions"><span id="incomeClock" class="income-clock">الإمدادات خلال 01:00</span><span id="saveStatus" class="save-status">جاري التحميل...</span><button id="saveBtn" class="icon-button" title="حفظ">حفظ</button><button id="resetBtn" class="icon-button" title="بدء لعبة جديدة">جديد</button></div>
   </header>
 
   <main class="game-layout">
     <section class="world-card">
       <div class="world-head"><div><span class="eyebrow">خريطة السودان</span><h1>ممرات السودان</h1></div><div class="turn-pill"><span id="turnLabel">اليوم 1</span><small>طور لاعب واحد</small></div></div>
-      <div id="gameHint" class="game-hint">اضغط على راية جيشك لاختيارها، ثم اضغط على ولاية مجاورة للتحرك أو الاشتباك.</div>
+      <div id="gameHint" class="game-hint">اضغط على راية جيشك لاختيارها، ثم اضغط على ولاية مجاورة للتحرك أو الاشتباك. كل ولاية تحت سيطرتك تمنحك إمدادات كل دقيقة.</div>
       <div class="map-frame">
         <svg id="mapSvg" viewBox="0 0 900 700" role="img" aria-label="خريطة تفاعلية لولايات السودان"></svg>
         <div id="mapLoading" class="map-loading">جاري تحميل الخريطة...</div>
@@ -37,6 +37,6 @@
   <div id="toast" class="toast" role="status"></div>
   <footer>كل الجيوش والنتائج خيالية لأغراض اللعب ولا تمثل خريطة سيطرة أو معلومات ميدانية حالية.</footer>
   <script src="./js/config.js"></script>
-  <script src="./js/app.js?v=5"></script>
+  <script src="./js/app.js?v=6"></script>
 </body>
 </html>
